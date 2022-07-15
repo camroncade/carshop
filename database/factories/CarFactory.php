@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Car>
@@ -18,14 +18,18 @@ class CarFactory extends Factory
     public function definition()
     {
         $car = randomMakeAndModel();
+        $sellerOptions = [
+            'Owner', 'Car Dealership',
+        ];
 
         return [
             'make' => $car['make'],
             'model' => $car['model'],
-            'year' => random_int(2000,2022),
+            'year' => random_int(2000, 2022),
             'condition' => collect(['used', 'new'])->random(),
-            'price' => random_int(5000,45000)*100,
+            'price' => random_int(5000, 45000) * 100,
             'status' => collect(['for sale', 'pending', 'sold'])->random(),
+            'seller' => fake()->randomElement($sellerOptions),
         ];
     }
 
