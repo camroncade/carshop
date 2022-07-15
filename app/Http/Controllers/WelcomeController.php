@@ -43,7 +43,7 @@ class WelcomeController extends Controller
                 $query->where('model', $model);
             })
             ->orderBy($sort)
-            ->get();
+            ->simplePaginate();
 
         return view('welcome', [
             'orderableColumns' => collect($this->orderableColumns)

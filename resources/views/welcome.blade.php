@@ -48,8 +48,15 @@
     }
 
     pre {
-      padding: 2em 0;
       color: red;
+    }
+
+    .py-4 {
+      padding: 1em 0;
+    }
+
+    .my-4 {
+      margin: 1em 0;
     }
   </style>
 </head>
@@ -97,7 +104,7 @@
         @endif
       </form>
       @if($errors->any())
-      <pre>
+      <pre class="py-4">
         {{$errors}}
       </pre>
       @endif
@@ -126,6 +133,9 @@
         @endforeach
       </tbody>
     </table>
+    <div class="my-4">
+      {{ $cars->appends((array)$request)->links() }}
+    </div>
   </div>
 </body>
 
