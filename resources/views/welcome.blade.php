@@ -62,7 +62,7 @@
 </head>
 
 <body>
-  {{-- @dump($orderableColumns, $request, $makes, $models, $cars) --}}
+  {{-- @dump($sortableColumns, $request, $makes, $models, $cars) --}}
   <div class="container">
     <h1>CarShop</h1>
     <div class="filters">
@@ -92,7 +92,7 @@
         <label>
           Sort By
           <select name="sort" onchange="this.form.submit()">
-            @foreach ($orderableColumns as $column)
+            @foreach ($sortableColumns as $column)
             <option value="{{$column->value}}" <?php if($request->sort === $column->value) echo ' selected' ; ?>>
               {{$column->label}}
             </option>
@@ -112,7 +112,7 @@
     <table>
       <thead>
         <tr>
-          @foreach ($orderableColumns as $column)
+          @foreach ($sortableColumns as $column)
           <th>{{$column->label}}</th>
           @endforeach
         </tr>
@@ -120,7 +120,7 @@
       <tbody>
         @foreach ($cars as $car)
         <tr>
-          @foreach ($orderableColumns as $column)
+          @foreach ($sortableColumns as $column)
           <td>
             @if($column->label === 'Price')
             ${{ number_format($car->{$column->value}) }}

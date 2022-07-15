@@ -8,7 +8,7 @@ use App\Models\Car;
 
 class WelcomeController extends Controller
 {
-    private $orderableColumns = [
+    private $sortableColumns = [
         'make',
         'model',
         'year',
@@ -27,12 +27,12 @@ class WelcomeController extends Controller
     public function index(Request $request)
     {
         $request->validate([
-            'sort' => ['nullable', Rule::in($this->orderableColumns)],
+            'sort' => ['nullable', Rule::in($this->sortableColumns)],
             'make' => ['nullable', 'string'],
             'model' => ['nullable', 'string'],
         ]);
 
-        $sort = $request->get('sort', reset($this->orderableColumns));
+        $sort = $request->get('sort', reset($this->sortableColumns));
         $make = $request->get('make');
         $model = $request->get('model');
 
@@ -46,7 +46,7 @@ class WelcomeController extends Controller
             ->simplePaginate();
 
         return view('welcome', [
-            'orderableColumns' => collect($this->orderableColumns)
+            'sortableColumns' => collect($this->sortableColumns)
                 ->map(function ($column) {
                     return (object) [
                         'value' => $column,
